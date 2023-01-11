@@ -95,7 +95,7 @@
 	"setconsole=" \
 		"if test $console = undefined; then " \
 			"if test $board_name = VAR-SOM-MX8M-MINI; then " \
-				"setenv console ttymxc3,115200; " \
+				"echo dont set anything; " \
 			"else " \
 				"setenv console ttymxc0,115200; " \
 			"fi; " \
