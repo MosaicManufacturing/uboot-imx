@@ -101,9 +101,9 @@
 			"fi; " \
 		"fi; \0" \
     "sethostname=" \
-		"if test -n $hostname_to_set; then" \
+		"if test -n $hostname_to_set; then " \
             "setenv hostname_to_set changeme; " \
-        "fi;" \
+        "fi; " \
         "echo hostname is ${hostname_to_set}; \0" \
 	"mmcargs=run setconsole; run sethostname; setenv bootargs console=${console} " \
 		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size} hostname=${hostname_to_set}\0 " \
