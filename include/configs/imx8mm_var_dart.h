@@ -68,7 +68,6 @@
 	"script=boot.scr\0" \
 	"image=Image.gz\0" \
 	"console=undefined\0" \
-	"hostname=undefined\0" \
 	"img_addr=0x42000000\0"			\
 	"fdt_addr=0x43000000\0"			\
 	"fdt_high=0xffffffffffffffff\0"		\
@@ -101,8 +100,13 @@
 				"setenv console ttymxc0,115200; " \
 			"fi; " \
 		"fi; \0" \
-	"mmcargs=run setconsole; setenv bootargs console=${console} " \
-		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size} ${hostname}\0 " \
+    "sethostname=" \
+		"if test -n $hostname_to_set; then" \
+            "setenv hostname_to_set changeme; " \
+        "fi;" \
+        "echo hostname is ${hostname_to_set}; \0" \
+	"mmcargs=run setconsole; run sethostname; setenv bootargs console=${console} " \
+		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size} hostname=${hostname_to_set}\0 " \
 	"loadbootscript=load mmc ${mmcdev}:${mmcpart} ${loadaddr} ${bootdir}/${script};\0" \
 	"bootscript=echo Running bootscript from mmc ...; " \
 		"source\0" \
