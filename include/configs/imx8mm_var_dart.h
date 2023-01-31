@@ -74,6 +74,7 @@
 	"boot_fdt=try\0" \
 	"ip_dyn=yes\0" \
 	"fdt_file=undefined\0" \
+	"hostname=undefined\0" \
 	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
 	"mmcblk=1\0" \
 	"mmcautodetect=yes\0" \
@@ -101,7 +102,7 @@
 			"fi; " \
 		"fi; \0" \
 	"mmcargs=run setconsole; setenv bootargs console=${console} " \
-		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size}\0 " \
+		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size} ${hostname}\0" \
 	"loadbootscript=load mmc ${mmcdev}:${mmcpart} ${loadaddr} ${bootdir}/${script};\0" \
 	"bootscript=echo Running bootscript from mmc ...; " \
 		"source\0" \
