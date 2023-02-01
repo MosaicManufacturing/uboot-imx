@@ -102,12 +102,13 @@
 		"fi; \0" \
     "sethostname=" \
 		"if test -n $hostname_to_set; then " \
-            "echo hostname isnt set;" \
+            "echo hostname_to_set isnt set;" \
             "setenv hostname_to_set changeme;" \
         "fi;" \
-        "echo hostname is $hostname_to_set;\0" \
+        "echo hostname is $hostname_to_set;" \
+        "setenv hostname_arg hostname=${hostname_to_set};\0" \
 	"mmcargs=run setconsole; run sethostname; setenv bootargs console=${console} " \
-		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size} hostname=${hostname_to_set}\0" \
+		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size} ${hostname_arg}\0" \
 	"loadbootscript=load mmc ${mmcdev}:${mmcpart} ${loadaddr} ${bootdir}/${script};\0" \
 	"bootscript=echo Running bootscript from mmc ...; " \
 		"source\0" \
