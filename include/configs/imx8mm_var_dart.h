@@ -73,7 +73,7 @@
 	"fdt_high=0xffffffffffffffff\0"		\
 	"boot_fdt=try\0" \
 	"ip_dyn=yes\0" \
-	"fdt_file=undefined\0" \
+	"fdt_file=boot.dtb\0" \
 	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
 	"mmcblk=1\0" \
 	"mmcautodetect=yes\0" \
@@ -96,7 +96,7 @@
 	"setconsole=" \
 		"if test $console = undefined; then " \
 			"if test $board_name = VAR-SOM-MX8M-MINI; then " \
-				"setenv console ttymxc3,115200; " \
+				"echo dont set anything; " \
 			"else " \
 				"setenv console ttymxc0,115200; " \
 			"fi; " \
