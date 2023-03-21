@@ -1,0 +1,107 @@
+/*
+ * Copyright 2018 NXP
+ * Copyright 2018-2020 Variscite Ltd.
+ * Copyright 2023 Mosaic Manufacturing Ltd.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "imx8mm-var-som.dtsi"
+
+/ {
+	model = "Variscite VAR-SOM-MX8M-MINI";
+	compatible = "variscite,imx8mm-var-som", "fsl,imx8mm";
+
+	chosen {
+		stdout-path = &uart4;
+	};
+
+	reg_usdhc2_vmmc: regulator-usdhc2 {
+		compatible = "regulator-fixed";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_reg_usdhc2_vmmc>;
+		regulator-name = "VSD_3V3";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		gpio = <&gpio4 22 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+		startup-delay-us = <100>;
+		u-boot,off-on-delay-us = <12000>;
+	};
+
+	reg_usb_otg2_vbus: regulator-usb-otg2-vbus {
+		compatible = "regulator-fixed";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_reg_usbotg2>;
+		regulator-name = "usb_otg2_vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		gpio = <&gpio5 1 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+	};
+};
+
+&iomuxc {
+	pinctrl_uart4: uart4grp {
+		fsl,pins = <
+			MX8MM_IOMUXC_UART4_RXD_UART4_DCE_RX		0x140
+			MX8MM_IOMUXC_UART4_TXD_UART4_DCE_TX		0x140
+		>;
+	};
+
+	pinctrl_reg_usbotg2: regulator_usbotg2 {
+		fsl,pins = <
+			MX8MM_IOMUXC_SAI3_TXD_GPIO5_IO1			0x16
+		>;
+	};
+
+    pinctrl_lvds_to_hdmi: lvdshdmigrp {
+        fsl,pins = <
+            MX8MM_IOMUXC_SAI1_TXFS_GPIO4_IO10       0x0
+            MX8MM_IOMUXC_GPIO1_IO15_GPIO1_IO15      0x0
+        >;
+    };
+
+    pinctrl_master_mcu: mastermcugrp {
+        fsl,pins = <
+            MX8MM_IOMUXC_SAI3_TXD_GPIO5_IO1         0x0
+            MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6       0x0
+        >;
+    };
+
+    pinctrl_slave_mcu: slavemcugrp {
+        fsl,pins = <
+            MX8MM_IOMUXC_SAI2_TXD0_GPIO4_IO26       0x0
+            MX8MM_IOMUXC_GPIO1_IO07_GPIO1_IO7       0x0
+        >;
+    };
+};
+
+
+/* Console */
+&uart4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart4>;
+	status = "okay";
+};
+
+&usbotg1 {
+	dr_mode = "peripheral";
+	status = "okay";
+};
+
+&usbotg2 {
+	dr_mode = "host";
+	vbus-supply = <&reg_usb_otg2_vbus>;
+	status = "okay";
+};
