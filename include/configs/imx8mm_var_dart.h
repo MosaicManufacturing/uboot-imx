@@ -94,13 +94,7 @@
 		"bootaux ${m4_addr};\0" \
 	"optargs=setenv bootargs ${bootargs} ${kernelargs};\0" \
 	"setconsole=" \
-		"if test $console = undefined; then " \
-			"if test $board_name = VAR-SOM-MX8M-MINI; then " \
-				"echo dont set anything; " \
-			"else " \
-				"setenv console ttymxc0,115200; " \
-			"fi; " \
-		"fi; \0" \
+        "setenv console undefined; " \
 	"mmcargs=run setconsole; setenv bootargs console=${console} " \
 		"root=/dev/mmcblk${mmcblk}p${mmcpart} rootwait rw ${cma_size}\0 " \
 	"loadbootscript=load mmc ${mmcdev}:${mmcpart} ${loadaddr} ${bootdir}/${script};\0" \
