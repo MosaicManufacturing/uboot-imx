@@ -160,6 +160,15 @@
 		>;
 		u-boot,dm-spl;
 	};
+
+	pinctrl_mp: mpgrp {
+		fsl,pins = <
+			MX8MM_IOMUXC_SAI2_TXFS_GPIO4_IO24		0x0
+			MX8MM_IOMUXC_SD2_CLK_GPIO2_IO13			0x0
+		>;
+		u-boot,dm-spl;
+	};
+
 };
 
 &uart1 { /* console */
