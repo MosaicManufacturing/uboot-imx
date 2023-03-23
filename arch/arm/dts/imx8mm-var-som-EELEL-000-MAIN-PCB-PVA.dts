@@ -36,6 +36,33 @@
 		off-on-delay-us = <20000>;
 		enable-active-high;
 	};
+
+	aliases {
+		usbgadget0 = &usbg1;
+		usbgadget1 = &usbg2;
+	};
+
+	firmware {
+		optee {
+			compatible = "linaro,optee-tz";
+			method = "smc";
+		};
+	};
+
+	usbg1: usbg1 {
+		compatible = "fsl,imx27-usb-gadget";
+		dr_mode = "peripheral";
+		chipidea,usb = <&usbotg1>;
+		status = "okay";
+	};
+
+	usbg2: usbg2 {
+		compatible = "fsl,imx27-usb-gadget";
+		dr_mode = "peripheral";
+		chipidea,usb = <&usbotg2>;
+		status = "okay";
+	};
+
 };
 
 &iomuxc {
@@ -141,7 +168,7 @@
 &uart1 { /* console */
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart1>;
-    uboot,dm-spl;
+	uboot,dm-spl;
 	status = "okay";
 };
 
@@ -163,34 +190,6 @@
 	bus-width = <4>;
 	vmmc-supply = <&reg_usdhc2_vmmc>;
 	status = "okay";
-};
-
-/ {
-	aliases {
-		usbgadget0 = &usbg1;
-		usbgadget1 = &usbg2;
-	};
-
-	firmware {
-		optee {
-			compatible = "linaro,optee-tz";
-			method = "smc";
-		};
-	};
-
-	usbg1: usbg1 {
-		compatible = "fsl,imx27-usb-gadget";
-		dr_mode = "peripheral";
-		chipidea,usb = <&usbotg1>;
-		status = "okay";
-	};
-
-	usbg2: usbg2 {
-		compatible = "fsl,imx27-usb-gadget";
-		dr_mode = "peripheral";
-		chipidea,usb = <&usbotg2>;
-		status = "okay";
-	};
 };
 
 &{/soc@0} {
