@@ -26,6 +26,7 @@
 	};
 
 	reg_usdhc2_vmmc: regulator-usdhc2 {
+		u-boot,dm-spl;
 		compatible = "regulator-fixed";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_reg_usdhc2_vmmc>;
@@ -68,39 +69,11 @@
 &iomuxc {
 	u-boot,dm-spl;
 
-	pinctrl_i2c2: i2c2grp {
-		fsl,pins = <
-			MX8MM_IOMUXC_I2C2_SCL_I2C2_SCL			0x400001c3
-			MX8MM_IOMUXC_I2C2_SDA_I2C2_SDA			0x400001c3
-		>;
-	};
-
-	pinctrl_i2c2_gpio: i2c2grp-gpio {
-		fsl,pins = <
-			MX8MM_IOMUXC_I2C2_SCL_GPIO5_IO16		0x1c3
-			MX8MM_IOMUXC_I2C2_SDA_GPIO5_IO17		0x1c3
-		>;
-	};
-
-	pinctrl_i2c4: i2c4grp {
-		fsl,pins = <
-			MX8MM_IOMUXC_I2C4_SCL_I2C4_SCL			0x400001c3
-			MX8MM_IOMUXC_I2C4_SDA_I2C4_SDA			0x400001c3
-		>;
-	};
-
-	pinctrl_i2c4_gpio: i2c4grp-gpio {
-		fsl,pins = <
-			MX8MM_IOMUXC_I2C4_SCL_GPIO5_IO20		0x1c3
-			MX8MM_IOMUXC_I2C4_SDA_GPIO5_IO21		0x1c3
-		>;
-	};
-
-
 	pinctrl_reg_usdhc2_vmmc: regulator-usdhc2 {
 		fsl,pins = <
 			MX8MM_IOMUXC_SD2_RESET_B_GPIO2_IO19		0x41
 		>;
+		u-boot,dm-spl;
 	};
 
 	pinctrl_uart1: uart1grp {
@@ -108,6 +81,7 @@
 			MX8MM_IOMUXC_UART1_RXD_UART1_DCE_RX		0x140
 			MX8MM_IOMUXC_UART1_TXD_UART1_DCE_TX		0x140
 		>;
+		u-boot,dm-spl;
 	};
 
 	pinctrl_usdhc2: usdhc2grp {
@@ -120,6 +94,7 @@
 			MX8MM_IOMUXC_SD2_DATA3_USDHC2_DATA3	0x1d0
 			MX8MM_IOMUXC_GPIO1_IO04_USDHC2_VSELECT	0x1d0
 		>;
+		u-boot,dm-spl;
 	};
 
 	pinctrl_usdhc2_100mhz: usdhc2grp100mhz {
@@ -132,6 +107,7 @@
 			MX8MM_IOMUXC_SD2_DATA3_USDHC2_DATA3	0x1d4
 			MX8MM_IOMUXC_GPIO1_IO04_USDHC2_VSELECT	0x1d0
 		>;
+		u-boot,dm-spl;
 	};
 
 	pinctrl_usdhc2_200mhz: usdhc2grp200mhz {
@@ -144,27 +120,8 @@
 			MX8MM_IOMUXC_SD2_DATA3_USDHC2_DATA3	0x1d6
 			MX8MM_IOMUXC_GPIO1_IO04_USDHC2_VSELECT	0x1d0
 		>;
+		u-boot,dm-spl;
 	};
-};
-
-&i2c2 {
-	clock-frequency = <100000>;
-	pinctrl-names = "default", "gpio";
-	pinctrl-0 = <&pinctrl_i2c2>;
-	pinctrl-1 = <&pinctrl_i2c2_gpio>;
-	scl-gpios = <&gpio5 16 GPIO_ACTIVE_HIGH>;
-	sda-gpios = <&gpio5 17 GPIO_ACTIVE_HIGH>;
-	status = "okay";
-};
-
-&i2c4 {
-	clock-frequency = <100000>;
-	pinctrl-names = "default", "gpio";
-	pinctrl-0 = <&pinctrl_i2c4>;
-	pinctrl-1 = <&pinctrl_i2c4_gpio>;
-	scl-gpios = <&gpio5 20 GPIO_ACTIVE_HIGH>;
-	sda-gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>;
-	status = "okay";
 };
 
 &uart1 { /* console */
@@ -233,24 +190,12 @@
 	u-boot,dm-spl;
 };
 
-&pinctrl_reg_usdhc2_vmmc {
-	u-boot,dm-spl;
-};
-
-&pinctrl_usdhc2 {
-	u-boot,dm-spl;
-};
-
 &pinctrl_usdhc3 {
 	u-boot,dm-spl;
 };
 
-&reg_usdhc2_vmmc {
-	u-boot,dm-spl;
-};
-
 &usdhc2 {
-    pinctrl-names = "default", "state_100mhz", "state_200mhz";
+	pinctrl-names = "default", "state_100mhz", "state_200mhz";
 	pinctrl-0 = <&pinctrl_usdhc2>;
 	pinctrl-1 = <&pinctrl_usdhc2_100mhz>;
 	pinctrl-2 = <&pinctrl_usdhc2_200mhz>;
@@ -263,7 +208,7 @@
 	assigned-clocks = <&clk IMX8MM_CLK_USDHC2>;
 	assigned-clock-rates = <400000000>;
 	assigned-clock-parents = <&clk IMX8MM_SYS_PLL1_400M>;
-    status = "okay";
+	status = "okay";
 };
 
 &usdhc3 {
