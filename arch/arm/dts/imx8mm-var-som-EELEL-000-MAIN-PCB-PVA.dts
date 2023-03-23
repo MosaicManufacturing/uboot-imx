@@ -66,6 +66,8 @@
 };
 
 &iomuxc {
+	u-boot,dm-spl;
+
 	pinctrl_i2c2: i2c2grp {
 		fsl,pins = <
 			MX8MM_IOMUXC_I2C2_SCL_I2C2_SCL			0x400001c3
@@ -215,10 +217,6 @@
 };
 
 &gpio5 {
-	u-boot,dm-spl;
-};
-
-&iomuxc {
 	u-boot,dm-spl;
 };
 
