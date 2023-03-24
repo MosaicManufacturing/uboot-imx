@@ -30,12 +30,14 @@
 		usbgadget1 = &usbg2;
 	};
 
+    /*
 	firmware {
 		optee {
 			compatible = "linaro,optee-tz";
 			method = "smc";
 		};
 	};
+    */
 
 	usbg1: usbg1 {
 		compatible = "fsl,imx27-usb-gadget";
