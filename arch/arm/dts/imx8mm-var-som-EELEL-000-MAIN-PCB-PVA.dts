@@ -15,11 +15,11 @@
 
 /dts-v1/;
 
-#include "imx8mm-var-dart.dtsi"
+#include "imx8mm-var-som.dtsi"
 
 / {
-	model = "Variscite DART-MX8M-MINI";
-	compatible = "variscite,imx8mm-var-dart", "fsl,imx8mm";
+	model = "Variscite SOM-MX8M-MINI";
+	compatible = "variscite,imx8mm-var-som", "fsl,imx8mm";
 
 	chosen {
 		stdout-path = &uart1;
