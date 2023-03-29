@@ -57,6 +57,8 @@
 
 &iomuxc {
 	u-boot,dm-spl;
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_hog>;
 
 	pinctrl_uart1: uart1grp {
 		fsl,pins = <
@@ -66,18 +68,27 @@
 		u-boot,dm-spl;
 	};
 
-	pinctrl_lvds_to_hdmi: lvdshdmigrp {
+	pinctrl_hog: hoggrp {
 		fsl,pins = <
 			MX8MM_IOMUXC_SAI1_TXFS_GPIO4_IO10		0x1c3
 			MX8MM_IOMUXC_GPIO1_IO15_GPIO1_IO15		0x1c3
+			MX8MM_IOMUXC_SAI3_TXD_GPIO5_IO1			0x1c3
+			MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6		0x1c3
+			MX8MM_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x1c3
+			MX8MM_IOMUXC_GPIO1_IO07_GPIO1_IO7		0x1c3
+			MX8MM_IOMUXC_ECSPI1_MISO_GPIO5_IO8		0x1c3
+			MX8MM_IOMUXC_SAI5_MCLK_GPIO3_IO25		0x1c3
+			MX8MM_IOMUXC_SAI2_TXFS_GPIO4_IO24		0x1c3
+			MX8MM_IOMUXC_SD2_CLK_GPIO2_IO13			0x1c3
 		>;
 		u-boot,dm-spl;
 	};
 
-	pinctrl_master_mcu: mastermcugrp {
+/*
+	pinctrl_lvds_to_hdmi: lvdshdmigrp {
 		fsl,pins = <
-			MX8MM_IOMUXC_SAI3_TXD_GPIO5_IO1			0x1c3
-			MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6		0x1c3
+			MX8MM_IOMUXC_SAI1_TXFS_GPIO4_IO10		0x1c3
+			MX8MM_IOMUXC_GPIO1_IO15_GPIO1_IO15		0x1c3
 		>;
 		u-boot,dm-spl;
 	};
@@ -111,6 +122,7 @@
 		>;
 		u-boot,dm-spl;
 	};
+    */
 
 };
 
