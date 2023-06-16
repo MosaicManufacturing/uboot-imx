@@ -797,6 +797,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
 	imx8mm-var-dart-customboard.dtb \
 	imx8mm-var-som-symphony.dtb \
 	imx8mm-var-som-EELEL-000-MAIN-PCB-PVA.dtb \
+	imx8mm-var-som-EELEL-000-MAIN-PCB-A1.dtb \
 	imx8mq-ddr3l-val.dtb \
 	imx8mq-ddr4-val.dtb \
 	imx8mq-evk.dtb \
