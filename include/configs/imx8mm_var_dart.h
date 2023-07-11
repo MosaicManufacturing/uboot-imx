@@ -172,7 +172,43 @@
 #define CONFIG_BOOTCOMMAND \
 	"run ramsize_check; " \
 	"mmc dev ${mmcdev}; "\
-	"pinmux status -a; "\
+	\
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 1; " \
+	\
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 1; " \
+	\
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 1; " \
+	\
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio set GPIO1_13; " \
+	"sleep 0.2; " \
+	"gpio clear GPIO1_13; " \
+	"sleep 1; " \
+	\
 	"if mmc rescan; then " \
 		"if test ${use_m4} = yes && run loadm4bin; then " \
 			"run runm4bin; " \
