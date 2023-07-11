@@ -173,10 +173,8 @@
 	"run ramsize_check; " \
 	"mmc dev ${mmcdev}; "\
 	\
-	"gpio input GPIO5_8; " \
 	"while true; do " \
-		"gpio read generic_gpio_val GPIO5_8; " \
-		"if test ${generic_gpio_val}; then " \
+		"if gpio input GPIO5_8; then " \
 			"gpio set GPIO1_13; " \
 		"else " \
 			"gpio clear GPIO1_13; " \
