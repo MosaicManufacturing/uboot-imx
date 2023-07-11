@@ -172,7 +172,7 @@
 #define CONFIG_BOOTCOMMAND \
 	"run ramsize_check; " \
 	"mmc dev ${mmcdev}; "\
-	"echo this should be visible; "\
+	"pinmux status -a; "\
 	"if mmc rescan; then " \
 		"if test ${use_m4} = yes && run loadm4bin; then " \
 			"run runm4bin; " \
