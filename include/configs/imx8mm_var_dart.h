@@ -173,41 +173,16 @@
 	"run ramsize_check; " \
 	"mmc dev ${mmcdev}; "\
 	\
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 1; " \
-	\
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 1; " \
-	\
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 1; " \
-	\
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio set GPIO1_13; " \
-	"sleep 0.2; " \
-	"gpio clear GPIO1_13; " \
-	"sleep 1; " \
+	"gpio input GPIO5_8; " \
+	"while true; do " \
+		"gpio read generic_gpio_val GPIO5_8; " \
+		"if test ${generic_gpio_val}; then " \
+			"gpio set GPIO1_13; " \
+		"else " \
+			"gpio clear GPIO1_13; " \
+		"fi; " \
+		"sleep 0.1; " \
+	"done " \
 	\
 	"if mmc rescan; then " \
 		"if test ${use_m4} = yes && run loadm4bin; then " \
