@@ -198,6 +198,7 @@
 #define CONFIG_BOOTCOMMAND \
 	"run ramsize_check; " \
 	"mmc dev ${mmcdev}; " \
+	"echo this should NOT be visible; "\
 	"if mmc rescan; then " \
 		"if test ${use_m7} = yes && run loadm7bin; then " \
 			"run runm7bin; " \
