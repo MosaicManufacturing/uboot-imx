@@ -174,7 +174,8 @@
 	"mmc dev ${mmcdev}; "\
 	\
 	"while true; do " \
-		"if gpio input GPIO5_8; then " \
+		"gpio input GPIO5_8; " \
+		"if $?; then " \
 			"gpio set GPIO1_13; " \
 		"else " \
 			"gpio clear GPIO1_13; " \
