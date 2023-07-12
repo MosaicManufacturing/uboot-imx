@@ -175,9 +175,11 @@
 	\
 	"while true; do " \
 		"gpio input GPIO5_8; " \
-		"if $?; then " \
+		"if test $? = '0'; then " \
+			"echo equals zero; " \
 			"gpio set GPIO1_13; " \
 		"else " \
+			"echo does not equal zero; " \
 			"gpio clear GPIO1_13; " \
 		"fi; " \
 		"sleep 0.1; " \
