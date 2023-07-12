@@ -181,7 +181,7 @@
 			"gpio clear GPIO1_13; " \
 		"fi; " \
 		"sleep 0.1; " \
-	"done " \
+	"done; " \
 	\
 	"if mmc rescan; then " \
 		"if test ${use_m4} = yes && run loadm4bin; then " \
