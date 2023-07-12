@@ -18,31 +18,31 @@
 #include "imx8mm-var-som.dtsi"
 
 / {
-	model = "Variscite SOM-MX8M-MINI";
-	compatible = "variscite,imx8mm-var-som", "fsl,imx8mm";
+  model = "Variscite SOM-MX8M-MINI";
+  compatible = "variscite,imx8mm-var-som", "fsl,imx8mm";
 
-	chosen {
-		stdout-path = &uart1;
-	};
+  chosen {
+    stdout-path = &uart1;
+  };
 
-	aliases {
-		usbgadget0 = &usbg1;
-		usbgadget1 = &usbg2;
-	};
+  aliases {
+    usbgadget0 = &usbg1;
+    usbgadget1 = &usbg2;
+  };
 
-	usbg1: usbg1 {
-		compatible = "fsl,imx27-usb-gadget";
-		dr_mode = "peripheral";
-		chipidea,usb = <&usbotg1>;
-		status = "okay";
-	};
+  usbg1: usbg1 {
+    compatible = "fsl,imx27-usb-gadget";
+    dr_mode = "peripheral";
+    chipidea,usb = <&usbotg1>;
+    status = "okay";
+  };
 
-	usbg2: usbg2 {
-		compatible = "fsl,imx27-usb-gadget";
-		dr_mode = "peripheral";
-		chipidea,usb = <&usbotg2>;
-		status = "okay";
-	};
+  usbg2: usbg2 {
+    compatible = "fsl,imx27-usb-gadget";
+    dr_mode = "peripheral";
+    chipidea,usb = <&usbotg2>;
+    status = "okay";
+  };
 
 };
 
@@ -50,106 +50,106 @@
     pinctrl-names = "default";
     pinctrl-0 = <&pinctrl_hog>;
 
-	pinctrl_uart1: uart1grp {
-		fsl,pins = <
-			MX8MM_IOMUXC_UART1_RXD_UART1_DCE_RX		0x140
-			MX8MM_IOMUXC_UART1_TXD_UART1_DCE_TX		0x140
-		>;
-		//u-boot,dm-spl;
-	};
+  pinctrl_uart1: uart1grp {
+    fsl,pins = <
+      MX8MM_IOMUXC_UART1_RXD_UART1_DCE_RX    0x140
+      MX8MM_IOMUXC_UART1_TXD_UART1_DCE_TX    0x140
+    >;
+    u-boot,dm-spl;
+  };
 
-	pinctrl_hog: hoggrp {
-		fsl,pins = <
-			MX8MM_IOMUXC_SAI1_TXFS_GPIO4_IO10		0x1c6
-			MX8MM_IOMUXC_GPIO1_IO15_GPIO1_IO15		0x1c6
-			MX8MM_IOMUXC_SAI3_TXD_GPIO5_IO1			0x186
-			MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6		0x1c6
-			MX8MM_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x186
-			MX8MM_IOMUXC_GPIO1_IO07_GPIO1_IO7		0x1c6
-			MX8MM_IOMUXC_ECSPI1_MISO_GPIO5_IO8		0x1c6
-			MX8MM_IOMUXC_SAI5_MCLK_GPIO3_IO25		0x1c6
-			MX8MM_IOMUXC_SAI2_TXFS_GPIO4_IO24		0x1c6
-			MX8MM_IOMUXC_SD2_CLK_GPIO2_IO13			0x1c6
-		>;
-		//u-boot,dm-spl;
-	};
+  pinctrl_hog: hoggrp {
+    fsl,pins = <
+      MX8MM_IOMUXC_SAI1_TXFS_GPIO4_IO10      0x1c6
+      MX8MM_IOMUXC_GPIO1_IO15_GPIO1_IO15     0x1c6
+      MX8MM_IOMUXC_SAI3_TXD_GPIO5_IO1        0x186
+      MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6      0x1c6
+      MX8MM_IOMUXC_SAI2_TXD0_GPIO4_IO26      0x186
+      MX8MM_IOMUXC_GPIO1_IO07_GPIO1_IO7      0x1c6
+      MX8MM_IOMUXC_ECSPI1_MISO_GPIO5_IO8     0x1c6
+      MX8MM_IOMUXC_SAI5_MCLK_GPIO3_IO25      0x1c6
+      MX8MM_IOMUXC_SAI2_TXFS_GPIO4_IO24      0x1c6
+      MX8MM_IOMUXC_SD2_CLK_GPIO2_IO13        0x1c6
+    >;
+    u-boot,dm-spl;
+  };
 };
 
 &uart1 { /* console */
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart1>;
-	uboot,dm-spl;
-	status = "okay";
+  pinctrl-names = "default";
+  pinctrl-0 = <&pinctrl_uart1>;
+  uboot,dm-spl;
+  status = "okay";
 };
 
 &usbotg1 {
-	status = "okay";
+  status = "okay";
 };
 
 &usbotg2 {
-	status = "okay";
+  status = "okay";
 };
 
 &{/soc@0} {
-	u-boot,dm-pre-reloc;
-	u-boot,dm-spl;
+  u-boot,dm-pre-reloc;
+  u-boot,dm-spl;
 };
 
 &aips1 {
-	u-boot,dm-spl;
-	u-boot,dm-pre-reloc;
+  u-boot,dm-spl;
+  u-boot,dm-pre-reloc;
 };
 
 &aips2 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &aips3 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &clk {
-	u-boot,dm-spl;
-	u-boot,dm-pre-reloc;
-	/delete-property/ assigned-clocks;
-	/delete-property/ assigned-clock-parents;
-	/delete-property/ assigned-clock-rates;
+  u-boot,dm-spl;
+  u-boot,dm-pre-reloc;
+  /delete-property/ assigned-clocks;
+  /delete-property/ assigned-clock-parents;
+  /delete-property/ assigned-clock-rates;
 };
 
 &gpio1 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &gpio2 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &gpio5 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &i2c1 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &osc_24m {
-	u-boot,dm-spl;
-	u-boot,dm-pre-reloc;
+  u-boot,dm-spl;
+  u-boot,dm-pre-reloc;
 };
 
 &pinctrl_i2c1 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &pinctrl_usdhc3 {
-	u-boot,dm-spl;
+  u-boot,dm-spl;
 };
 
 &usdhc3 {
-	u-boot,dm-spl;
-	mmc-hs400-1_8v;
-	mmc-hs400-enhanced-strobe;
-	assigned-clocks = <&clk IMX8MM_CLK_USDHC3>;
-	assigned-clock-rates = <400000000>;
-	assigned-clock-parents = <&clk IMX8MM_SYS_PLL1_400M>;
+  u-boot,dm-spl;
+  mmc-hs400-1_8v;
+  mmc-hs400-enhanced-strobe;
+  assigned-clocks = <&clk IMX8MM_CLK_USDHC3>;
+  assigned-clock-rates = <400000000>;
+  assigned-clock-parents = <&clk IMX8MM_SYS_PLL1_400M>;
 };
