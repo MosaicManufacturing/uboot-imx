@@ -67,8 +67,7 @@
 	"bootdir=/boot\0"	\
 	"script=boot.scr\0" \
 	"image=Image.gz\0" \
-	"console=tty01,115200n8\0" \
-	"usbtty=cdc_acm\0" \
+	"console=undefined\0" \
 	"img_addr=0x42000000\0"			\
 	"fdt_addr=0x43000000\0"			\
 	"fdt_high=0xffffffffffffffff\0"		\
@@ -238,25 +237,15 @@
 
 /* USB configs */
 #ifndef CONFIG_SPL_BUILD
-/*
 #define CONFIG_CMD_USB
 #define CONFIG_USB_STORAGE
 #define CONFIG_USBD_HS
-*/
 
-/*
 #define CONFIG_CMD_USB_MASS_STORAGE
 #define CONFIG_USB_GADGET_MASS_STORAGE
 #define CONFIG_USB_FUNCTION_MASS_STORAGE
-*/
-#endif
 
-/* Configure USB Console */
-// #define CONFIG_CMD_USB 1
-// #define CONFIG_CI_UDC 1
-// #define CONFIG_USB_DEVICE 1
-// #define CONFIG_USB_TTY 1
-// #define CONFIG_USBD_HS 1
+#endif
 
 #define CONFIG_USB_GADGET_VBUS_DRAW 2
 
