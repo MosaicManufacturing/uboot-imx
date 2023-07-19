@@ -47,8 +47,8 @@
 };
 
 &iomuxc {
-    pinctrl-names = "default";
-    pinctrl-0 = <&pinctrl_hog>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_hog>;
 
 	pinctrl_uart1: uart1grp {
 		fsl,pins = <
@@ -66,10 +66,11 @@
 			MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6		0x1c6
 			MX8MM_IOMUXC_SAI2_TXD0_GPIO4_IO26		0x186
 			MX8MM_IOMUXC_GPIO1_IO07_GPIO1_IO7		0x1c6
-			MX8MM_IOMUXC_ECSPI1_MISO_GPIO5_IO8		0x1c6
+			MX8MM_IOMUXC_ECSPI1_MISO_GPIO5_IO8		0x110
 			MX8MM_IOMUXC_SAI5_MCLK_GPIO3_IO25		0x1c6
 			MX8MM_IOMUXC_SAI2_TXFS_GPIO4_IO24		0x1c6
 			MX8MM_IOMUXC_SD2_CLK_GPIO2_IO13			0x1c6
+			MX8MM_IOMUXC_ECSPI2_SS0_GPIO5_IO13		0x156
 		>;
 		//u-boot,dm-spl;
 	};
