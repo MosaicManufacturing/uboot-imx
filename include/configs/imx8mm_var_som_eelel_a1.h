@@ -154,6 +154,7 @@
     "gpio set GPIO1_13; " \
     "gpio input GPIO5_8; " \
     "setenv should_boot 0; " \
+    "sleep 0.5; " \
     "for i in 1 2 3 4 5; do " \
       "gpio clear GPIO1_13; " \
       "gpio read should_boot GPIO5_8; " \
@@ -170,7 +171,7 @@
     "if test ${should_boot} = 1; then " \
       "echo we should boot; " \
     "else " \
-      "echo after > 1.0s wait, GENERIC_GPIO is still low -> poweroff; " \
+      "echo after > 1.5s wait, GENERIC_GPIO is still low -> poweroff; " \
       "poweroff; " \
     "fi;\0"
 
