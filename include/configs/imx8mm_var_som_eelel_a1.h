@@ -111,6 +111,7 @@
 			"setenv cma_size cma=640M@1376M; " \
 		"fi;\0" \
 	"mmcboot=echo Booting from mmc ...; " \
+		"run showinfo; " \
 		"run mmcargs; " \
 		"run optargs; " \
 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
@@ -143,7 +144,9 @@
 			"fi; " \
 		"else " \
 			"booti; " \
-		"fi;\0"
+		"fi;\0" \
+   "showinfo=echo Bootloader info:; " \
+    "echo board_name ${board_name};\0"
 
 #define CONFIG_BOOTCOMMAND \
 	"run ramsize_check; " \
