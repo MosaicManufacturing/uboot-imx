@@ -157,6 +157,14 @@ config TARGET_VERDIN_IMX8MM
        select SUPPORT_SPL
        select IMX8M_LPDDR4
 
+config TARGET_IMX8MM_VAR_SOM_EELEL_A1
+	bool "imx8mm_var_som_eelel_a1"
+	select IMX8MM
+	select SUPPORT_SPL
+	select IMX8M_DDR4
+	select IMX8M_LPDDR4
+	select IMX8M_BOARD_INIT_DRAM
+
 endchoice
 
 source "board/freescale/imx8mq_evk/Kconfig"
@@ -169,6 +177,7 @@ source "board/freescale/imx8mp_evk/Kconfig"
 source "board/variscite/imx8mn_var_som/Kconfig"
 source "board/variscite/imx8mq_var_dart/Kconfig"
 source "board/variscite/imx8mm_var_dart/Kconfig"
+source "board/mosaic/imx8mm_var_som_eelel_a1/Kconfig"
 source "board/toradex/verdin-imx8mm/Kconfig"
 
 endif
