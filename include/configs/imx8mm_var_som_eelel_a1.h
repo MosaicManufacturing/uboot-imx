@@ -112,6 +112,7 @@
 		"fi;\0" \
 	"mmcboot=echo Booting from mmc ...; " \
 		"run showinfo; " \
+		"run powerSeq; " \
 		"run mmcargs; " \
 		"run optargs; " \
 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
@@ -145,8 +146,32 @@
 		"else " \
 			"booti; " \
 		"fi;\0" \
-   "showinfo=echo Bootloader info:; " \
-    "echo board_name ${board_name};\0"
+  "showinfo=echo Bootloader info:; " \
+    "echo board_name ${board_name}; " \
+    "echo carrier_rev ${carrier_rev};\0" \
+  "powerSeq=echo execute power up sequence; " \
+    "gpio set GPIO5_13; " \
+    "gpio set GPIO1_13; " \
+    "setenv should_boot no; " \
+    "for i in 1 2 3 4 5; do " \
+      "gpio clear GPIO1_13; " \
+      "if gpio input GPIO5_8; then " \
+        "echo GENERIC_GPIO is high, we should boot; " \
+        "setenv should_boot yes; " \
+        "exit; " \
+      "else " \
+        "echo GENERIC_GPIO is low, we should wait; " \
+      "fi;" \
+      "sleep 0.1 " \
+      "gpio set GPIO1_13; " \
+      "sleep 0.1; " \
+    "done; " \
+    "if test ${should_boot} = yes; then " \
+      "echo we should boot; " \
+    "else " \
+      "echo after > 1.0s wait, GENERIC_GPIO is still low -> poweroff; " \
+      "poweroff; " \
+    "fi;\0"
 
 #define CONFIG_BOOTCOMMAND \
 	"run ramsize_check; " \
