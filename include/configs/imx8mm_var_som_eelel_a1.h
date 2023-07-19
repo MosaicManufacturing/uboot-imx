@@ -152,12 +152,13 @@
   "powerSeq=echo execute power up sequence; " \
     "gpio set GPIO5_13; " \
     "gpio set GPIO1_13; " \
-    "setenv should_boot no; " \
+    "gpio input GPIO5_8; " \
+    "setenv should_boot 0; " \
     "for i in 1 2 3 4 5; do " \
       "gpio clear GPIO1_13; " \
-      "if gpio input GPIO5_8; then " \
+      "gpio read should_boot GPIO5_8; " \
+      "if test ${should_boot} = 1; then " \
         "echo GENERIC_GPIO is high, we should boot; " \
-        "setenv should_boot yes; " \
         "exit; " \
       "else " \
         "echo GENERIC_GPIO is low, we should wait; " \
@@ -166,7 +167,7 @@
       "gpio set GPIO1_13; " \
       "sleep 0.1; " \
     "done; " \
-    "if test ${should_boot} = yes; then " \
+    "if test ${should_boot} = 1; then " \
       "echo we should boot; " \
     "else " \
       "echo after > 1.0s wait, GENERIC_GPIO is still low -> poweroff; " \
