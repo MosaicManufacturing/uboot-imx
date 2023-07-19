@@ -223,9 +223,6 @@ int board_late_init(void)
 			env_set("som_rev", "som_rev13");
 			break;
 		}
-		var_carrier_eeprom_read(CARRIER_EEPROM_BUS_SOM, CARRIER_EEPROM_ADDR, &carrier_eeprom);
-		var_carrier_eeprom_get_revision(&carrier_eeprom, carrier_rev, sizeof(carrier_rev));
-		env_set("carrier_rev", carrier_rev);
 	}
 	else if (id == DART_MX8M_MINI) {
 
@@ -238,6 +235,9 @@ int board_late_init(void)
 		else
 			env_set("carrier_rev", "legacy");
 	}
+  
+  // only valid carrier board 
+  env_set("carrier_rev", "EELEL-000-MAIN-PCB-A1");
 
 #ifdef CONFIG_ENV_IS_IN_MMC
 	board_late_mmc_env_init();
