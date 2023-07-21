@@ -151,22 +151,19 @@
     "echo carrier_rev ${carrier_rev};\0" \
   "powerSeq=echo execute power up sequence; " \
     "gpio set GPIO5_13; " \
-    "gpio set GPIO1_13; " \
     "gpio input GPIO5_8; " \
-    "setenv should_boot 0; " \
     "sleep 0.5; " \
     "for i in 1 2 3 4 5; do " \
-      "gpio clear GPIO1_13; " \
       "gpio read should_boot GPIO5_8; " \
       "if test ${should_boot} = 1; then " \
+        "gpio set GPIO1_13; " \
         "echo GENERIC_GPIO is high, we should boot; " \
         "exit; " \
       "else " \
+        "gpio clear GPIO1_13; " \
         "echo GENERIC_GPIO is low, we should wait; " \
       "fi;" \
-      "sleep 0.1 " \
-      "gpio set GPIO1_13; " \
-      "sleep 0.1; " \
+      "sleep 0.2; " \
     "done; " \
     "if test ${should_boot} = 1; then " \
       "echo we should boot; " \
