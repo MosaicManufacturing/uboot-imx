@@ -2,10 +2,11 @@
 /*
  * Copyright 2018 NXP
  * Copyright 2018-2020 Variscite Ltd.
+ * Copyright 2023 Mosaic Manufacturing Ltd.
  */
 
-#ifndef __IMX8MM_VAR_DART_H
-#define __IMX8MM_VAR_DART_H
+#ifndef __IMX8MM_VAR_SOM_EELEL_000_MAIN_PCB_A1_H
+#define __IMX8MM_VAR_SOM_EELEL_000_MAIN_PCB_A1_H
 
 #include <linux/sizes.h>
 #include <asm/arch/imx-regs.h>
@@ -101,24 +102,7 @@
 		"source\0" \
 	"loadimage=load mmc ${mmcdev}:${mmcpart} ${img_addr} ${bootdir}/${image};" \
 		"unzip ${img_addr} ${loadaddr}\0" \
-	"findfdt=" \
-		"if test $fdt_file = undefined; then " \
-			"if test $board_name = VAR-SOM-MX8M-MINI; then " \
-				"if test $carrier_rev = legacy; then " \
-					"setenv fdt_file imx8mm-var-som-symphony-legacy.dtb; " \
-				"else " \
-					"setenv fdt_file imx8mm-var-som-symphony.dtb; " \
-				"fi; " \
-			"else " \
-				"if test $carrier_rev = legacy; then " \
-					"setenv fdt_file imx8mm-var-dart-dt8mcustomboard-legacy.dtb; " \
-				"else " \
-					"setenv fdt_file imx8mm-var-dart-dt8mcustomboard.dtb; " \
-				"fi; " \
-			"fi; " \
-		"fi; \0" \
-	"loadfdt=run findfdt; " \
-		"echo fdt_file=${fdt_file}; " \
+	"loadfdt=echo fdt_file=${fdt_file}; " \
 		"load mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${bootdir}/${fdt_file}\0" \
 	"ramsize_check="\
 		"if test $sdram_size -le 512; then " \
@@ -127,6 +111,8 @@
 			"setenv cma_size cma=640M@1376M; " \
 		"fi;\0" \
 	"mmcboot=echo Booting from mmc ...; " \
+		"run showinfo; " \
+		"run powerSeq; " \
 		"run mmcargs; " \
 		"run optargs; " \
 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
@@ -151,7 +137,6 @@
 		"run netargs; " \
 		"run optargs; " \
 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
-			"run findfdt; " \
 			"echo fdt_file=${fdt_file}; " \
 			"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
 				"booti ${loadaddr} - ${fdt_addr}; " \
@@ -160,7 +145,33 @@
 			"fi; " \
 		"else " \
 			"booti; " \
-		"fi;\0"
+		"fi;\0" \
+  "showinfo=echo Bootloader info:; " \
+    "echo board_name ${board_name}; " \
+    "echo carrier_rev ${carrier_rev};\0" \
+  "powerSeq=echo execute power up sequence; " \
+    "gpio clear GPIO5_13; " \
+    "gpio input GPIO5_8; " \
+    "sleep 0.5; " \
+    "for i in 1 2 3 4 5; do " \
+      "gpio input GPIO5_8; " \
+      "setenv should_boot $?; " \
+      "if test ${should_boot} = 1; then " \
+        "gpio clear GPIO1_13; " \
+        "echo GENERIC_GPIO is high, we should boot; " \
+        "exit; " \
+      "else " \
+        "gpio set GPIO1_13; " \
+        "echo GENERIC_GPIO is low, we should wait; " \
+      "fi;" \
+      "sleep 0.2; " \
+    "done; " \
+    "if test ${should_boot} = 1; then " \
+      "echo we should boot; " \
+    "else " \
+      "echo after > 1.5s wait, GENERIC_GPIO is still low -> poweroff; " \
+      "poweroff; " \
+    "fi;\0"
 
 #define CONFIG_BOOTCOMMAND \
 	"run ramsize_check; " \
@@ -195,7 +206,7 @@
 	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
 
 #define CONFIG_ENV_OVERWRITE
-#define CONFIG_SYS_MMC_ENV_DEV		1   /* USDHC2 */
+#define CONFIG_SYS_MMC_ENV_DEV		2   /* EMMC */
 
 /* Size of malloc() pool */
 #define CONFIG_SYS_MALLOC_LEN		SZ_32M
