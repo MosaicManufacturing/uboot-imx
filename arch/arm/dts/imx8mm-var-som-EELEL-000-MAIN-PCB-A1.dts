@@ -60,7 +60,7 @@
 
 	pinctrl_uart2_rs485: uart2rs485 {
 		fsl,pins = <
-			MX8MM_IOMUXC_GPIO3_IO24_GPIO_3_IO24     0x140
+			MX8MM_IOMUXC_SAI5_RXD3_GPIO3_IO24       0x016
 		>;
 	};
 
