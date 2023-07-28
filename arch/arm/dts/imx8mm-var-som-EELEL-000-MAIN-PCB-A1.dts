@@ -58,6 +58,12 @@
 		//u-boot,dm-spl;
 	};
 
+	pinctrl_uart2_rs485: uart2rs485 {
+		fsl,pins = <
+			MX8MM_IOMUXC_GPIO3_IO24_GPIO_3_IO24     0x140
+		>;
+	};
+
 	pinctrl_hog: hoggrp {
 		fsl,pins = <
 			MX8MM_IOMUXC_SAI1_TXFS_GPIO4_IO10		0x1c6
@@ -81,6 +87,14 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart1>;
 	uboot,dm-spl;
+	status = "okay";
+};
+
+&uart2 { /* Material Pod */
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2>, <&pinctrl_uart2_rs485>;
+	rts-gpios = <&gpio3 24 GPIO_ACTIVE_HIGH>;
+	linux,rs485-enabled-at-boot-time;
 	status = "okay";
 };
 
