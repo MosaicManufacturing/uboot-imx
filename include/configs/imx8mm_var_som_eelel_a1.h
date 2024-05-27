@@ -112,7 +112,6 @@
 		"fi;\0" \
 	"mmcboot=echo Booting from mmc ...; " \
 		"run showinfo; " \
-		"run powerSeq; " \
 		"run mmcargs; " \
 		"run optargs; " \
 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
